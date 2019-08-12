@@ -1,7 +1,8 @@
-package com.example.project_auth.domain
+package com.example.project_auth.domain.temp
 
 import androidx.lifecycle.MutableLiveData
 import com.example.project_auth.data.UserRepository
+import com.example.project_auth.domain.AuthUseCase
 import com.example.project_auth.model.Resource
 
 abstract class UserInteractor<T>(

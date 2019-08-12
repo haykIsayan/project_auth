@@ -2,7 +2,7 @@ package com.example.project_auth.presentation
 
 import android.app.Application
 import com.example.project_auth.data.UserDataSource
-import com.example.project_auth.domain.LoginInteractor
+import com.example.project_auth.domain.temp.LoginInteractor
 
 class LoginPresenter(loginViewOperator: LoginViewController,
                      private val application: Application): AuthPresenter<LoginViewController>(loginViewOperator) {

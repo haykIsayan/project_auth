@@ -1,4 +1,4 @@
-package com.example.project_auth.domain
+package com.example.project_auth.domain.temp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
