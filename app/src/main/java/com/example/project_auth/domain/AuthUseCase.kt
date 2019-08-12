@@ -7,4 +7,6 @@ interface AuthUseCase<T> {
 
     fun execute(): LiveData<Resource<T>>
 
+    suspend fun test() = execute()
+
 }

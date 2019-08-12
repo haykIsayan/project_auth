@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">project_auth</string>
+    <string name="app_name">CyberSocial</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_failed_message">Failed to log in</string>
 </resources>
