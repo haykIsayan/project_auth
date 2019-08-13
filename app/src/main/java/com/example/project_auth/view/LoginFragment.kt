@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.project_auth.R
+import com.example.project_auth.model.User
+import com.example.project_auth.presentation.LoginViewController
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginViewController {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -21,6 +23,17 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+    }
+
+    override fun onLoginSuccess(user: User) {
+
+    }
+
+    override fun showLoading(message: String) {
+
+    }
+
+    override fun onLoginFailed(throwable: Throwable?) {
 
     }
 
