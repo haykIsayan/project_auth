@@ -3,6 +3,8 @@ package com.example.project_auth.domain
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.example.project_auth.AuthUtils
+import com.example.project_auth.NoUserFoundResource
+import com.example.project_auth.PasswordIncorrectResource
 import com.example.project_auth.data.UserDataSource
 import com.example.project_auth.model.Resource
 import com.example.project_auth.model.User
@@ -37,21 +39,21 @@ class LoginInteractorTest {
     }
 
     @Test
-    fun testLoginInteractor() {
+    fun test() {
         runBlocking {
-            testLoginFailed()
+            testNoUserFound()
             testLoginSuccess()
+            testPasswordIncorrect()
         }
     }
 
-    private suspend fun testLoginFailed() {
+    private suspend fun testNoUserFound() {
         mLoginUserInteractor.enablePending(false)
         val data = mLoginUserInteractor.test()
 
         assertNotNull(data)
         val resource = data.value
-        assertTrue(resource is Resource.FailResource)
-        assertTrue((resource as Resource.FailResource).throwable.message == "FUCK")
+        assertTrue(resource is NoUserFoundResource)
     }
 
     private suspend fun testLoginSuccess() {
@@ -66,9 +68,14 @@ class LoginInteractorTest {
         assertTrue(validateUser(resultUser))
     }
 
+    private suspend fun testPasswordIncorrect() {
+        mLoginUserInteractor = LoginUserInteractor(mUser.userName, "asdf", mUserDataSource)
 
-    fun testTransferToLiveData() {
+        val data = mLoginUserInteractor.test()
 
+        assertNotNull(data)
+        val resource = data.value
+        assertTrue(resource is PasswordIncorrectResource)
     }
 
     private fun validateUser(resultUser: User) =
@@ -76,5 +83,4 @@ class LoginInteractorTest {
                     && resultUser.password == mUser.password
                     && resultUser.firstName == mUser.firstName
                     && resultUser.lastName == mUser.lastName
-
 }

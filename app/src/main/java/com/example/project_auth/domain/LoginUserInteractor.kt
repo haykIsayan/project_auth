@@ -1,5 +1,7 @@
 package com.example.project_auth.domain
 
+import com.example.project_auth.NoUserFoundResource
+import com.example.project_auth.PasswordIncorrectResource
 import com.example.project_auth.data.UserRepository
 import com.example.project_auth.model.Resource
 import com.example.project_auth.model.User
@@ -17,10 +19,9 @@ class LoginUserInteractor(private val userName: String, private val password: St
         }
     }
 
-    private fun validateUser(user: User?) =
-            if (user == null || user.password != password) {
-                Resource.fail<User>(Throwable("FUCK"))
-            } else {
-                Resource.success(user)
-            }
+    private fun validateUser(user: User?) = when {
+        user == null -> NoUserFoundResource()
+        user.password != password -> PasswordIncorrectResource()
+        else -> Resource.success(user)
+    }
 }

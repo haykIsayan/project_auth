@@ -2,6 +2,7 @@ package com.example.project_auth.domain
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import com.example.project_auth.AlreadyRegisteredResource
 import com.example.project_auth.AuthUtils
 import com.example.project_auth.data.UserDataSource
 import com.example.project_auth.model.Resource
@@ -16,7 +17,6 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class AuthenticationTest {
-
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -66,9 +66,10 @@ class AuthenticationTest {
     }
 
     suspend fun testRegisterAgain() {
-        val registerResource = mRegisterUserInteractor.run()
+        val registerData = mRegisterUserInteractor.test()
 
-        assertNotNull(registerResource)
-        assertTrue(registerResource is Resource.FailResource)
+        assertNotNull(registerData)
+        val registerResource = registerData.value
+        assertTrue(registerResource is AlreadyRegisteredResource)
     }
 }

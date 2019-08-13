@@ -7,7 +7,8 @@ sealed class Resource<T> constructor(val status: Status = Status.PENDING
 
     data class PendingResource<T>(val message: String): Resource<T>()
 
-    data class FailResource<T>(val throwable: Throwable): Resource<T>(Status.FAIL)
+    open class FailResource<T>(val throwable: Throwable?): Resource<T>(Status.FAIL)
+
 
     companion object {
         fun <T> success(data: T) = SuccessResource(data)

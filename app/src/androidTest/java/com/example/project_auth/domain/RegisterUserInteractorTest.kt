@@ -2,6 +2,7 @@ package com.example.project_auth.domain
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import com.example.project_auth.AlreadyRegisteredResource
 import com.example.project_auth.AuthUtils
 import com.example.project_auth.data.UserDataSource
 import com.example.project_auth.model.Resource
@@ -49,7 +50,7 @@ class RegisterUserInteractorTest {
 
         assertNotNull(data)
         val resource = data.value
-        assertTrue(resource is Resource.FailResource)
+        assertTrue(resource is AlreadyRegisteredResource)
     }
 
     private suspend fun testRegisterSuccess() {

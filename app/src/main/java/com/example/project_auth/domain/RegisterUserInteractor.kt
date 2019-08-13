@@ -1,5 +1,6 @@
 package com.example.project_auth.domain
 
+import com.example.project_auth.AlreadyRegisteredResource
 import com.example.project_auth.data.UserRepository
 import com.example.project_auth.model.Resource
 import com.example.project_auth.model.User
@@ -16,7 +17,7 @@ class RegisterUserInteractor(
                 userRepository.insertUser(this.user)
                 return Resource.success(this.user)
             }
-            return Resource.fail(Throwable("Already Added"))
+            return AlreadyRegisteredResource()
         } catch (throwable: Throwable) {
             return Resource.fail(throwable)
         }

@@ -13,7 +13,7 @@ abstract class AuthPresenter<T: ViewController>(protected var viewController: T?
     protected fun <T> executeUseCase(authUseCase: AuthUseCase<T>,
                                      onSuccess: (data: T) -> Unit,
                                      onPending: (pendingMessage: String) -> Unit,
-                                     onFailure: (throwable: Throwable) -> Unit) {
+                                     onFailure: (throwable: Throwable?) -> Unit) {
 
         viewController?.apply {
             authUseCase.execute().observe(this, Observer {

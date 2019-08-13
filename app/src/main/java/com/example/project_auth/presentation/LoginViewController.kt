@@ -8,6 +8,6 @@ interface LoginViewController: ViewController {
 
     fun showLoading(message: String)
 
-    fun onLoginFailed(throwable: Throwable)
+    fun onLoginFailed(throwable: Throwable?)
 
 }
