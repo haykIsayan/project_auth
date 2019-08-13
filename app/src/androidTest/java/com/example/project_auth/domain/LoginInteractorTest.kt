@@ -14,7 +14,10 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 class LoginInteractorTest {
 
     @get:Rule
@@ -50,9 +53,9 @@ class LoginInteractorTest {
     private suspend fun testNoUserFound() {
         mLoginUserInteractor.enablePending(false)
         val data = mLoginUserInteractor.test()
-
-        assertNotNull(data)
         val resource = data.value
+
+        assertNotNull(resource)
         assertTrue(resource is NoUserFoundResource)
     }
 
@@ -60,9 +63,9 @@ class LoginInteractorTest {
         mUserDataSource.insertUser(mUser)
 
         val data = mLoginUserInteractor.test()
-
-        assertNotNull(data)
         val resource = data.value
+
+        assertNotNull(resource)
         assertTrue(resource is Resource.SuccessResource)
         val resultUser = (resource as Resource.SuccessResource).data
         assertTrue(validateUser(resultUser))
@@ -72,9 +75,9 @@ class LoginInteractorTest {
         mLoginUserInteractor = LoginUserInteractor(mUser.userName, "asdf", mUserDataSource)
 
         val data = mLoginUserInteractor.test()
-
-        assertNotNull(data)
         val resource = data.value
+
+        assertNotNull(resource)
         assertTrue(resource is PasswordIncorrectResource)
     }
 

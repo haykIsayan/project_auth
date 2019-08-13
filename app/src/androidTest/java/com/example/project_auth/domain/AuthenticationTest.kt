@@ -49,17 +49,17 @@ class AuthenticationTest {
 
     suspend fun testRegisterThenLogin() {
         val registerData = mRegisterUserInteractor.test()
-
-        assertNotNull(registerData)
         val registerResource = registerData.value
+
+        assertNotNull(registerResource)
         assertTrue(registerResource is Resource.SuccessResource)
         val registerUser = (registerResource as Resource.SuccessResource).data
 
         mLoginUserInteractor = LoginUserInteractor(registerUser.userName, registerUser.password, mUserDataSource)
         val loginData = mLoginUserInteractor.test()
-
-        assertNotNull(loginData)
         val loginResource = loginData.value
+
+        assertNotNull(loginResource)
         assertTrue(loginResource is Resource.SuccessResource)
         val loginUser = (loginResource as Resource.SuccessResource).data
         assertTrue(loginUser.userName == registerUser.userName)
@@ -67,9 +67,9 @@ class AuthenticationTest {
 
     suspend fun testRegisterAgain() {
         val registerData = mRegisterUserInteractor.test()
-
-        assertNotNull(registerData)
         val registerResource = registerData.value
+
+        assertNotNull(registerResource)
         assertTrue(registerResource is AlreadyRegisteredResource)
     }
 }

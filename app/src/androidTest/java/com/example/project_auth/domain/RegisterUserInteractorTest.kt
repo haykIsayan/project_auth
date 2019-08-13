@@ -12,7 +12,10 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 class RegisterUserInteractorTest {
 
 
@@ -47,17 +50,17 @@ class RegisterUserInteractorTest {
 
     private suspend fun testRegisterFailed() {
         val data = mRegisterUserInteractor.test()
-
-        assertNotNull(data)
         val resource = data.value
+
+        assertNotNull(resource)
         assertTrue(resource is AlreadyRegisteredResource)
     }
 
     private suspend fun testRegisterSuccess() {
         val data = mRegisterUserInteractor.test()
-
-        assertNotNull(data)
         val resource = data.value
+
+        assertNotNull(resource)
         assertTrue(resource is Resource.SuccessResource)
     }
 
