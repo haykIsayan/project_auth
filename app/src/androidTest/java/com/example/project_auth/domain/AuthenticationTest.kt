@@ -1,5 +1,6 @@
 package com.example.project_auth.domain
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.example.project_auth.AuthUtils
 import com.example.project_auth.data.UserDataSource
@@ -8,12 +9,17 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class AuthenticationTest {
+
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val mUser = AuthUtils.getDummieUser()
     private lateinit var mUserDataSource: UserDataSource
@@ -42,15 +48,19 @@ class AuthenticationTest {
     }
 
     suspend fun testRegisterThenLogin() {
-        val registerResource = mRegisterUserInteractor.run()
+        val registerData = mRegisterUserInteractor.test()
 
-        assertNotNull(registerResource)
+        assertNotNull(registerData)
+        val registerResource = registerData.value
         assertTrue(registerResource is Resource.SuccessResource)
         val registerUser = (registerResource as Resource.SuccessResource).data
 
         mLoginUserInteractor = LoginUserInteractor(registerUser.userName, registerUser.password, mUserDataSource)
-        val loginResource = mLoginUserInteractor.run()
-        assertNotNull(loginResource is Resource.SuccessResource)
+        val loginData = mLoginUserInteractor.test()
+
+        assertNotNull(loginData)
+        val loginResource = loginData.value
+        assertTrue(loginResource is Resource.SuccessResource)
         val loginUser = (loginResource as Resource.SuccessResource).data
         assertTrue(loginUser.userName == registerUser.userName)
     }

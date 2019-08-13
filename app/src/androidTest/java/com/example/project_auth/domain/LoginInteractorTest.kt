@@ -46,22 +46,29 @@ class LoginInteractorTest {
 
     private suspend fun testLoginFailed() {
         mLoginUserInteractor.enablePending(false)
-        val data = mLoginUserInteractor.run()
+        val data = mLoginUserInteractor.test()
 
         assertNotNull(data)
-        assertTrue(data is Resource.FailResource)
-        assertTrue((data as Resource.FailResource).throwable.message == "FUCK")
+        val resource = data.value
+        assertTrue(resource is Resource.FailResource)
+        assertTrue((resource as Resource.FailResource).throwable.message == "FUCK")
     }
 
     private suspend fun testLoginSuccess() {
         mUserDataSource.insertUser(mUser)
 
-        val data = mLoginUserInteractor.run()
+        val data = mLoginUserInteractor.test()
 
         assertNotNull(data)
-        assertTrue(data is Resource.SuccessResource)
-        val resultUser = (data as Resource.SuccessResource).data
+        val resource = data.value
+        assertTrue(resource is Resource.SuccessResource)
+        val resultUser = (resource as Resource.SuccessResource).data
         assertTrue(validateUser(resultUser))
+    }
+
+
+    fun testTransferToLiveData() {
+
     }
 
     private fun validateUser(resultUser: User) =

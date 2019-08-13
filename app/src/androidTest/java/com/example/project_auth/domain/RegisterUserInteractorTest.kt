@@ -1,5 +1,6 @@
 package com.example.project_auth.domain
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.example.project_auth.AuthUtils
 import com.example.project_auth.data.UserDataSource
@@ -8,9 +9,14 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class RegisterUserInteractorTest {
+
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var mUserDataSource: UserDataSource
     private lateinit var mRegisterUserInteractor: RegisterUserInteractor
@@ -38,19 +44,20 @@ class RegisterUserInteractorTest {
         }
     }
 
-
     private suspend fun testRegisterFailed() {
-        val data = mRegisterUserInteractor.run()
+        val data = mRegisterUserInteractor.test()
 
         assertNotNull(data)
-        assertTrue(data is Resource.FailResource)
+        val resource = data.value
+        assertTrue(resource is Resource.FailResource)
     }
 
     private suspend fun testRegisterSuccess() {
-        val data = mRegisterUserInteractor.run()
+        val data = mRegisterUserInteractor.test()
 
         assertNotNull(data)
-        assertTrue(data is Resource.SuccessResource)
+        val resource = data.value
+        assertTrue(resource is Resource.SuccessResource)
     }
 
 }
