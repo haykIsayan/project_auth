@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_username_layout_auth_view"
+        android:layout_width="@dimen/auth_field_width"
+        android:layout_height="@dimen/auth_field_height"
+        android:layout_gravity="center"
+        android:hint="@string/user_name_hint"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_first_name_layout_auth_view"
+        android:layout_width="@dimen/auth_field_width"
+        android:layout_height="@dimen/auth_field_height"
+        android:layout_gravity="center"
+        android:hint="@string/first_name_hint"
+        android:allowUndo="true"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_last_name_layout_auth_view"
+        android:layout_width="@dimen/auth_field_width"
+        android:layout_height="@dimen/auth_field_height"
+        android:layout_gravity="center"
+        android:hint="@string/last_name_hint"
+        android:allowUndo="true"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_password_layout_auth_view"
+        android:layout_width="@dimen/password_field_width"
+        android:layout_height="@dimen/password_field_height"
+        android:layout_gravity="center"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:allowUndo="true"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_confirm_password_layout_auth_view"
+        android:layout_width="@dimen/password_field_width"
+        android:layout_height="@dimen/password_field_height"
+        android:layout_gravity="center"
+        android:hint="@string/confirm_password_hint"
+        android:inputType="textPassword"
+        android:allowUndo="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_button_layout_auth_view"
+        android:layout_width="@dimen/auth_button_width"
+        android:layout_height="@dimen/auth_button_height"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
+        android:text="@string/login_button_text"
+        style="@style/AuthButtonTheme"
+        app:iconGravity="textStart"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_message_layout_auth_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/AuthMessageTheme"
+        android:text="@string/login_message_text"/>
+
+</LinearLayout>
