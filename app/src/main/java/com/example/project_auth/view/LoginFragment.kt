@@ -10,8 +10,8 @@ import androidx.navigation.Navigation
 
 import com.example.project_auth.R
 import com.example.project_auth.model.User
-import com.example.project_auth.presentation.LoginPresenter
-import com.example.project_auth.presentation.LoginViewController
+import com.example.project_auth.presentation.presenters.LoginPresenter
+import com.example.project_auth.presentation.controllers.LoginViewController
 
 class LoginFragment : Fragment(), LoginViewController {
 
@@ -37,6 +37,11 @@ class LoginFragment : Fragment(), LoginViewController {
                 this::navigateToRegister)
     }
 
+    override fun onResume() {
+        super.onResume()
+        avLoginView.populateViews()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::avLoginView.isInitialized) {
@@ -55,17 +60,23 @@ class LoginFragment : Fragment(), LoginViewController {
 
 
     override fun onLoginSuccess(user: User) {
-
         Toast.makeText(this.context, "Success!", Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoading(message: String) {
         Toast.makeText(this.context, "Pending", Toast.LENGTH_SHORT).show()
-
     }
 
-    override fun onLoginFailed(throwable: Throwable?) {
-        Toast.makeText(this.context, "Fuck", Toast.LENGTH_SHORT).show()
+    override fun onError(throwable: Throwable) {
+        Toast.makeText(this.context, throwable.message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNoUserFound() {
+        Toast.makeText(this.context, "No User Found", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPasswordIncorrect() {
+        Toast.makeText(this.context, "Password Incorrect", Toast.LENGTH_SHORT).show()
     }
 
 }

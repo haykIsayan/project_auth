@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterFragment">
+    tools:context=".view.RegisterFragment">
 
     <com.example.project_auth.view.AuthView
         android:id="@+id/av_register_view_fragment_register"

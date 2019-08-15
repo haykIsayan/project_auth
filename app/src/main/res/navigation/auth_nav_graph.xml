@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/destination_register"
-        android:name="com.example.project_auth.RegisterFragment"
+        android:name="com.example.project_auth.view.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.project_auth.MainFragment"
+        android:name="com.example.project_auth.view.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <argument

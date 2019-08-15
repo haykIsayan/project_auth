@@ -1,4 +1,4 @@
-package com.example.project_auth.presentation
+package com.example.project_auth.presentation.controllers
 
 import com.example.project_auth.model.User
 
@@ -8,6 +8,8 @@ interface LoginViewController: ViewController {
 
     fun showLoading(message: String)
 
-    fun onLoginFailed(throwable: Throwable?)
+    fun onNoUserFound()
+
+    fun onPasswordIncorrect()
 
 }

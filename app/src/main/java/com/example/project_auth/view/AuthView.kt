@@ -13,6 +13,8 @@ import com.google.android.material.textfield.TextInputEditText
 
 class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context, attributes) {
 
+    private val mBundle = Bundle()
+
     private val etUsername: EditText
     private val etFirstName: TextInputEditText
     private val etLastName: TextInputEditText
@@ -37,7 +39,8 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         mbAuthMessage = this.findViewById(R.id.mb_message_layout_auth_view)
     }
 
-    private fun populateViews(bundle: Bundle) {
+    fun populateViews() {
+        val bundle = mBundle
         bundle.getString(EXTRA_USERNAME)?.apply {
             etUsername.setText(this)
         }
@@ -69,7 +72,8 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
                         onMessageClicked: () -> Unit) {
 
         bundle?.apply {
-            populateViews(this)
+//            populateViews(this)
+            mBundle.putAll(this)
         }
 
         etFirstName.visibility = View.GONE
@@ -100,7 +104,7 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
             onMessageClicked: () -> Unit) {
 
         bundle?.apply {
-            populateViews(this)
+//            populateViews(this)
         }
 
         etFirstName.visibility = View.VISIBLE
