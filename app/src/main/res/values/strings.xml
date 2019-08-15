@@ -1,5 +1,23 @@
 <resources>
-    <string name="app_name">CyberSocial</string>
+    <string name="app_name">Authenticada</string>
+
+    <string name="user_name_hint">Username</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+
+    <string name="login_button_text">Log In</string>
+    <string name="register_button_text">Register</string>
+
+    <string name="register_message_text">Already registered? Then log in</string>
+    <string name="login_message_text">First time? Then register</string>
+
 
     <string name="login_failed_message">Failed to log in</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

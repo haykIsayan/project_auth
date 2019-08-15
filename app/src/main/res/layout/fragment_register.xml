@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginFragment">
+    tools:context=".RegisterFragment">
 
     <com.example.project_auth.view.AuthView
-        android:id="@+id/av_login_view_fragment_login"
+        android:id="@+id/av_register_view_fragment_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
