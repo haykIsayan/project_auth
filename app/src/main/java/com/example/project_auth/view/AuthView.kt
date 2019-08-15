@@ -13,8 +13,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context, attributes) {
 
-    private val mBundle = Bundle()
-
     private val etUsername: EditText
     private val etFirstName: TextInputEditText
     private val etLastName: TextInputEditText
@@ -39,8 +37,7 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         mbAuthMessage = this.findViewById(R.id.mb_message_layout_auth_view)
     }
 
-    fun populateViews() {
-        val bundle = mBundle
+    private fun populateViews(bundle: Bundle) {
         bundle.getString(EXTRA_USERNAME)?.apply {
             etUsername.setText(this)
         }
@@ -56,9 +53,7 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         bundle.getString(EXTRA_CONFIRM_PASSWORD)?.apply {
             etConfirmPassword.setText(this)
         }
-
     }
-
 
     fun getBundle() = Bundle().apply {
         putString(EXTRA_USERNAME, etUsername.text.toString())
@@ -72,8 +67,7 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
                         onMessageClicked: () -> Unit) {
 
         bundle?.apply {
-//            populateViews(this)
-            mBundle.putAll(this)
+            populateViews(this)
         }
 
         etFirstName.visibility = View.GONE
@@ -86,6 +80,11 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         mbAuthMessage.text = context.resources.getString(R.string.login_message_text)
 
         mbAuthButton.setOnClickListener {
+            if (etUsername.text.toString().isEmpty() || etPassword.text.toString().isEmpty()) {
+                Toast.makeText(context, "Please complete the form", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             onLoginClicked(
                     etUsername.text.toString(),
                     etPassword.text.toString())
@@ -104,7 +103,7 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
             onMessageClicked: () -> Unit) {
 
         bundle?.apply {
-//            populateViews(this)
+            populateViews(this)
         }
 
         etFirstName.visibility = View.VISIBLE
@@ -117,6 +116,12 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         mbAuthMessage.text = context.resources.getString(R.string.register_message_text)
 
         mbAuthButton.setOnClickListener {
+
+            if (areFieldsEmpty()) {
+                Toast.makeText(context, "Please complete the form", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (etPassword.text.toString() != etConfirmPassword.text.toString()) {
                 Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -134,6 +139,12 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         }
     }
 
+    private fun areFieldsEmpty() =
+            etUsername.text.toString().isEmpty() ||
+                    etFirstName.text.toString().isEmpty() ||
+                    etLastName.text.toString().isEmpty() ||
+                    etPassword.text.toString().isEmpty() ||
+                    etConfirmPassword.text.toString().isEmpty()
 
 
     companion object {
@@ -143,6 +154,4 @@ class AuthView(context: Context, attributes: AttributeSet): LinearLayout(context
         const val EXTRA_PASSWORD = "Extra.Password"
         const val EXTRA_CONFIRM_PASSWORD = "Extra.Confirm.Password"
     }
-
-
 }

@@ -39,7 +39,7 @@ class LoginFragment : Fragment(), LoginViewController {
 
     override fun onResume() {
         super.onResume()
-        avLoginView.populateViews()
+//        avLoginView.populateViews()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
